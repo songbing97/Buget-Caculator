@@ -23,10 +23,11 @@ type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
 const App: React.FC = () => {
   const [dataSource, setDataSource] = useState<Item[]>(() => {
-    const hash = window.location.hash.slice(1);
-    console.log(decodeURIComponent(hash))
-    if (hash) {
-      return JSON.parse(decodeURIComponent(hash)) || []
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        return JSON.parse(decodeURIComponent(hash)) || []
+      }
     }
     return []
   });
@@ -109,7 +110,9 @@ const App: React.FC = () => {
   const [balance, setBalance] = useState(10000);
 
   const updateUrl = () => {
-    window.location.hash = encodeURIComponent(JSON.stringify(dataSource));
+    if (typeof window !== 'undefined') {
+      window.location.hash = encodeURIComponent(JSON.stringify(dataSource));
+    }
   }
 
   useEffect(() => {
