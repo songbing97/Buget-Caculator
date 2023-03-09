@@ -34,7 +34,7 @@ const App: React.FC = () => {
     console.log(dataSource)
     let i = 0;
     dataSource.forEach(item => {
-      i = Math.max(i, item.key)
+      i = Math.max(i, Number(item.key))
     })
     return i;
   });
@@ -156,13 +156,19 @@ const App: React.FC = () => {
     };
   });
 
+  const changeBudget = (val: number | null) => {
+    if (typeof val === 'number') {
+      setBudget(val)
+    }
+  }
+
   return (
     <div style={{width: '100%'}}>
       <div className={styles.header}>
         <div className={styles.budget}>
           <Space>
             <label>Budget</label>
-            <InputNumber value={budget} onChange={setBudget} />,
+            <InputNumber value={budget} onChange={changeBudget} />,
             <label>Summary Cost ${summary},</label>
             <label>You still have ${balance}.</label>
           </Space>
