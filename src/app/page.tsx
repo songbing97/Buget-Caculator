@@ -5,9 +5,10 @@ import { Button } from 'antd'
 
 export default function Home() {
   const copy = () => {
-    document.getElementById('copyvalue')!.value = window.location.href
+    
+    (document.getElementById('copyvalue')! as HTMLInputElement).value = window.location.href
     var e = document.getElementById("copyvalue");
-    e!.select(); // 选择对象
+    (e! as HTMLInputElement).select(); // 选择对象
     document.execCommand("Copy"); // 执行浏览器复制命令
   }
   return (
